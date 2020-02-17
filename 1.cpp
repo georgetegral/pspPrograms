@@ -31,9 +31,11 @@ double hours[10] = {15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2}
 */
 //< ERASED
 
-//Node struct
+/*
+This section of the program defines the node struct to be used in the linked list and in main
+*/
 //MODIFIED >
-struct node
+struct node //STRUCT >
 {
 //< MODIFIED
 	//ERASED >
@@ -45,10 +47,12 @@ struct node
 	double data;
 	//< MODIFIED
 	struct node *next;
-};
+}; //< STRUCT
 
-//Linked list class
-class linked_list
+/*
+This section of the program defines the linked list class using the node struct with the functions necesary to solve the problem
+*/
+class linked_list //CLASS >
 {
 	private: 
 		node *head, *tail;
@@ -63,7 +67,7 @@ class linked_list
 		
 		//method for adding to linked list
 		//MODIFIED >
-		void addNode(double value)
+		void addNode(double value) //FUNCTION >
 		{
 		//< MODIFIED
 			node *tmp = new node;
@@ -90,12 +94,12 @@ class linked_list
 				tail->next = tmp;
 				tail = tail->next;
 			}
-		}
+		} //< FUNCTION
 		
-		node* getHead()
+		node* getHead() //FUNCTION >
 		{
 			return head;
-		}
+		} //< FUNCTION
 			
 		//ERASED >
 		/*
@@ -110,22 +114,26 @@ class linked_list
 		//< ERASED
 		
 		//NEW >
-		double getData(node *curr)
+		double getData(node *curr) //FUNCTION >
 		{
 			return curr->data;
-		}
+		} //< FUNCTION
 		//< NEW
 		//MODIFIED >
-		void removeHead()
+		void removeHead() //FUNCTION >
 		{
 		//< MODIFIED
 			node *temp = head;
 			head =head->next;
 			delete temp;
-		}
-};
+		} //< FUNCTION
+}; //< CLASS
 
-int main(int argc, char *argv[])
+/*
+This section of the program is the main part, using a linked list it recieves numbers and stores them in a linked list, then it calculates the mean and the
+standard deviation of those numbers and finally it prints them to the user.
+*/
+int main(int argc, char *argv[]) //FUNCTION >
 {
 	//Create instance
 	linked_list list;
@@ -147,7 +155,7 @@ int main(int argc, char *argv[])
 	double acumulatedData = 0;
 	int numberOfItems = 0;
 	
-	while(flag){
+	while(flag){ /* Will the user add another number? */
 		cout<<"Add a number? (y/n)"<<endl;
 		cin>>answer;
 		if(answer=='y')
@@ -204,7 +212,7 @@ int main(int argc, char *argv[])
 	double currentData;
 	double standardDeviation = 0;
 	
-	while(temporalNode!=NULL)
+	while(temporalNode!=NULL) /* Have all the nodes been passed through? */
 	{
 		currentData = list.getData(temporalNode);
 		standardDeviation += pow(currentData - mean, 2.0);
@@ -243,5 +251,5 @@ int main(int argc, char *argv[])
 	*/
 	//< ERASED
 	return 0;
-}
+} //< FUNCTION
 
