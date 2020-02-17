@@ -164,7 +164,6 @@ int main(int argc, char *argv[])
 		}
 		
 	}
-	
 	double mean = acumulatedData/numberOfItems;
 	//< NEW
 	
@@ -202,7 +201,6 @@ int main(int argc, char *argv[])
 	//< ERASED
 	
 	//NEW >
-	
 	double currentData;
 	double standardDeviation = 0;
 	
@@ -219,7 +217,6 @@ int main(int argc, char *argv[])
 	
 	cout<<"Mean: "<<mean<<endl;
 	cout<<"Standard Deviation: "<<standardDeviation<<endl;
-	
 	//< NEW
 	
 	//ERASED >
