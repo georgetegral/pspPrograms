@@ -65,7 +65,6 @@ class linked_list //CLASS >
 			tail = NULL;
 		}
 		
-		//method for adding to linked list
 		//MODIFIED >
 		void addNode(double value) //FUNCTION >
 		{
@@ -135,10 +134,7 @@ standard deviation of those numbers and finally it prints them to the user.
 */
 int main(int argc, char *argv[]) //FUNCTION >
 {
-	//Create instance
 	linked_list list;
-	
-	//put data in addNode method
 	//ERASED >
 	/*
 	for(int i=0;i<10;i++){
@@ -155,7 +151,8 @@ int main(int argc, char *argv[]) //FUNCTION >
 	double acumulatedData = 0;
 	int numberOfItems = 0;
 	
-	while(flag){ /* Will the user add another number? */
+	while(flag)
+	{ // Will the user add another number?
 		cout<<"Add a number? (y/n)"<<endl;
 		cin>>answer;
 		if(answer=='y')
@@ -212,11 +209,10 @@ int main(int argc, char *argv[]) //FUNCTION >
 	double currentData;
 	double standardDeviation = 0;
 	
-	while(temporalNode!=NULL) /* Have all the nodes been passed through? */
+	while(temporalNode!=NULL) //Have all the nodes been passed through?
 	{
 		currentData = list.getData(temporalNode);
 		standardDeviation += pow(currentData - mean, 2.0);
-		//Moving to next node
 		list.removeHead();
 		temporalNode = list.getHead();
 	}
