@@ -31,7 +31,7 @@ bool endsWith(const string &mainStr, const string &toMatch) //FUNCTION >
 
 int main(int argc, char *argv[]) //FUNCTION >
 {
-	ifstream program("1.cpp");
+	ifstream program("3.cpp");
 	string line;
 	
 	vector<string> parts;
