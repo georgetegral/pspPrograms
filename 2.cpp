@@ -31,7 +31,7 @@ bool endsWith(const string &mainStr, const string &toMatch) //FUNCTION >
 
 int main(int argc, char *argv[]) //FUNCTION >
 {
-	ifstream program("3.cpp");
+	ifstream program("4.cpp");
 	string line;
 	
 	vector<string> parts;
@@ -304,6 +304,38 @@ int main(int argc, char *argv[]) //FUNCTION >
 				inErased = false;
 			}
 			
+			if(countLine && line.find("//NEW >") != string::npos && endsWith(line,"//NEW >"))
+			{
+				countLine = false;
+			}
+			else if(countLine && line.find("//REUSED >") != string::npos && endsWith(line,"//REUSED >"))
+			{
+				countLine = false;
+			}
+			else if(countLine && line.find("//ERASED >") != string::npos && endsWith(line,"//ERASED >"))
+			{
+				countLine = false;
+			}
+			else if(countLine && line.find("//MODIFIED >") != string::npos && endsWith(line,"//MODIFIED >"))
+			{
+				countLine = false;
+			}
+			else if(countLine && line.find("//< NEW") != string::npos && endsWith(line,"//< NEW"))
+			{
+				countLine = false;
+			}
+			else if(countLine && line.find("//< REUSED") != string::npos && endsWith(line,"//< REUSED"))
+			{
+				countLine = false;
+			}
+			else if(countLine && line.find("//< ERASED") != string::npos && endsWith(line,"//< ERASED"))
+			{
+				countLine = false;
+			}
+			else if(countLine && line.find("//< MODIFIED") != string::npos && endsWith(line,"//< MODIFIED"))
+			{
+				countLine = false;
+			}
 			
 			if(countLine)
 			{

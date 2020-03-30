@@ -20,14 +20,14 @@ Listing contents:
 		double getLnMinusAvg()
 		int main()
 */
-
+//NEW >
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <cmath>
 #include <math.h>
 using namespace std;
-
+//< NEW
 //REUSED >
 vector<double> getDataRow() //FUNCTION >
 {
@@ -61,7 +61,7 @@ double getAverage(vector<double> dataset) //FUNCTION >
 	return getAcum(dataset)/dataset.size();
 } //< FUNCTION
 //< REUSED
-
+//NEW >
 vector<double> getAverageForEach(vector<double> dataset1, vector<double> dataset2) //FUNCTION >
 {
 	double value = 0;
@@ -98,7 +98,8 @@ vector<double> getLnMinusAvg(vector<double> dataset,double avg) //FUNCTION >
 	return tmpVector;
 } //< FUNCTION
 
-int main(int argc, char *argv[]) { //FUNCTION >
+int main(int argc, char *argv[]) //FUNCTION >
+{ 
 	
 	vector<double> data1 = getDataRow();
 	vector<double> data2 = getDataRow();
@@ -127,4 +128,4 @@ int main(int argc, char *argv[]) { //FUNCTION >
 	
 	return 0;
 } //< FUNCTION
-
+//< NEW
