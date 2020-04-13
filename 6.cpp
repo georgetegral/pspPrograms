@@ -1,20 +1,22 @@
 /*
-Program Assignment: Program 5
+Program Assignment: Program 6
 Name:				Jorge René García Rosado
-Date:				30/03/2020
-Description:		This program integrates a fuction using Simpsons's rule with the t distribution as function, receiving a value of x and a value of Degres of Freedom (dof)
+Date:				13/04/2020
+Description:		This program integrates a fuction using Simpsons's rule with the t distribution as function, and estimating the value of x, receiving a value of p and a value of Degres of Freedom (dof)
 */
 
 /*
 Listing contents:
-Program descriptions
-Listing contents
-Includes
-Source code in 5.cpp
-double gamma()
-double f()
-double getPValue()
-int main()
+	Program descriptions
+	Listing contents
+	Includes
+	Source code in 6.cpp
+		double gamma()
+		double f()
+		double getPValue()
+		double readDoubleValue()
+		double isPositive()
+		int main()
 */
 //NEW >
 #define _USE_MATH_DEFINES
@@ -73,7 +75,7 @@ double getPValue(double w, double num_seg, double dof) //FUNCTION >
 } //< FUNCTION
 //< REUSED
 //NEW >
-double readValue(string txt) //FUNCTION >
+double readDoubleValue(string txt) //FUNCTION >
 {
 	double val = 0;
 	while (val<=0)
@@ -102,8 +104,8 @@ bool isPositive(double num) //FUNCTION >
 
 int main(int argc, char *argv[]) //FUNCTION >
 {
-	double p = readValue("p");
-	double dof = readValue("degrees of freedom");
+	double p = readDoubleValue("p");
+	double dof = readDoubleValue("degrees of freedom");
 	double num_seg = 10;
 	double x = 1;
 	double E = 1;
@@ -113,44 +115,45 @@ int main(int argc, char *argv[]) //FUNCTION >
 	bool firstRun = true;
 	double w;
 	double pCalc;
-	while ( eAbs > .00001 )
+	while ( eAbs > .000000001 )
 	{
 		w = x / num_seg;
 		pCalc = getPValue(w,num_seg,dof);
 		E = p - pCalc;
 		eAbs = abs(p - pCalc);
-		if( p != pCalc )
+		if(firstRun)
 		{
-			if(firstRun)
+			if(isPositive(E))
 			{
-				if(isPositive(E))
-				{
-					x = x + delta;
-				}
-				else
-				{
-					x = x - delta;
-				}
-				firstRun = false;
+				x = x + delta;
+				prevSign = true;
 			}
 			else
 			{
-				if(isPositive(E) != prevSign)
-				{
-					delta = delta / 2;
-				}
-				if(isPositive(E))
-				{
-					x = x + delta;
-				}
-				else
-				{
-					x = x - delta;
-				}
+				x = x - delta;
+				prevSign = false;
+			}
+			firstRun = false;
+		}
+		else
+		{
+			if(isPositive(E) != prevSign)
+			{
+				delta = delta / 2;
+			}
+			if(isPositive(E))
+			{
+				x = x + delta;
+				prevSign = true;
+			}
+			else
+			{
+				x = x - delta;
+				prevSign = false;
 			}
 		}
 	}
-	cout<<"X= "<<x<<endl;
+	cout<<"x = "<<x<<endl;
 	return 0;
 } //< FUNCTION
 //< NEW
