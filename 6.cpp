@@ -24,6 +24,7 @@ Listing contents:
 #include <vector>
 #include <cmath>
 #include <math.h>
+#include <iomanip>
 using namespace std;
 //< NEW
 //REUSED >
@@ -102,55 +103,100 @@ bool isPositive(double num) //FUNCTION >
 	}
 } //< FUNCTION
 
+double getP(double x, double dof)
+{
+	double p1;
+	double p2;
+	double diff;
+	double w;
+	double num_seg = 10.0;
+	double E = .000000001;
+	bool isValid = false;
+	bool repeat = false;
+	w = x / num_seg;
+	while (!isValid)
+	{
+		if(!repeat)
+		{
+			p1 = getPValue(w,num_seg,dof);
+		}
+		num_seg = num_seg * 2;
+		w = x / num_seg;
+		p2 = getPValue(w,num_seg,dof);
+		diff = abs(p1 - p2);
+		if( diff < E )
+		{
+			isValid = true;
+		}
+		else 
+		{
+			repeat = true;
+			p1 = p2;
+		}
+	}
+	return p2;
+}
+
 int main(int argc, char *argv[]) //FUNCTION >
 {
 	double p = readDoubleValue("p");
 	double dof = readDoubleValue("degrees of freedom");
-	double num_seg = 10;
+	double e = 0.000000001;
 	double x = 1;
-	double E = 1;
-	double eAbs = 1;
 	double delta = .5;
-	bool prevSign = true;
-	bool firstRun = true;
-	double w;
-	double pCalc;
-	while ( eAbs > .000000001 )
+	int runs = 0;
+	bool flag = true;
+	bool prevSign;
+	double pCalc = 0;
+	double eCalc;
+	
+	while(flag)
 	{
-		w = x / num_seg;
-		pCalc = getPValue(w,num_seg,dof);
-		E = p - pCalc;
-		eAbs = abs(p - pCalc);
-		if(firstRun)
+		pCalc = getP(x,dof);
+		if(fabs(p - pCalc) <= e)
 		{
-			if(isPositive(E))
-			{
-				x = x + delta;
-				prevSign = true;
-			}
-			else
-			{
-				x = x - delta;
-				prevSign = false;
-			}
-			firstRun = false;
+			flag = false;
 		}
 		else
 		{
-			if(isPositive(E) != prevSign)
+			eCalc = p - pCalc;
+			if(runs == 0)
 			{
-				delta = delta / 2;
+				if(pCalc < p)
+				{
+					x+=delta;
+				}
+				else
+				{
+					x-=delta;
+				}
 			}
-			if(isPositive(E))
+			else
 			{
-				x = x + delta;
+				if(isPositive(eCalc) != prevSign)
+				{
+					delta = delta / 2;
+				}
+				if(pCalc < p)
+				{
+					x+=delta;
+				}
+				else
+				{
+					x-=delta;
+				}
+			}
+			
+			if(isPositive(eCalc))
+			{
 				prevSign = true;
 			}
 			else
 			{
-				x = x - delta;
 				prevSign = false;
 			}
+			
+			runs++;
 		}
 	}
 	cout<<"x = "<<x<<endl;
