@@ -103,7 +103,7 @@ bool isPositive(double num) //FUNCTION >
 	}
 } //< FUNCTION
 
-double getP(double x, double dof)
+double getP(double x, double dof)//FUNCTION >
 {
 	double p1;
 	double p2;
@@ -135,7 +135,7 @@ double getP(double x, double dof)
 		}
 	}
 	return p2;
-}
+} //< FUNCTION
 
 int main(int argc, char *argv[]) //FUNCTION >
 {
